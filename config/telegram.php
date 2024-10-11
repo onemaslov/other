@@ -46,7 +46,7 @@ return [
         'botTakBot' => [
             'name' => 'botTakBot1349',
             'token' => env('BOT_TAK_BOT_TOKEN'),
-            'webhook_url' => env('TELEGRAM_WEBHOOK_URL', 'YOUR-BOT-WEBHOOK-URL'),
+            'webhook_url' => env('BOT_TAK_BOT_WEBHOOK_URL', '123'),
 //            'uri_prefix' => env('TELEGRAM_TALKING_BOT_URI_POSTFIX'),
             'commands' => [
 //                App\Http\TelegramTalkingBotCommands\StartCommand::class,
