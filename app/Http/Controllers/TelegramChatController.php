@@ -29,6 +29,12 @@ class TelegramChatController extends Controller
 
     public  function webhook(): JsonResponse
     {
+        Log::debug(
+            'yes',
+            [
+                'update' => 'uu'
+            ]
+        );
         $update = Telegram::bot('botTakBot')->commandsHandler(true);
 
         if ($update->hasCommand()) {
