@@ -49,6 +49,7 @@ return [
             'webhook_url' => env('BOT_TAK_BOT_WEBHOOK_URL', '123'),
 //            'uri_prefix' => env('TELEGRAM_TALKING_BOT_URI_POSTFIX'),
             'commands' => [
+                App\Http\TelegramBotCommands\StartCommand::class,
 //                App\Http\TelegramTalkingBotCommands\StartCommand::class,
 //                App\Http\TelegramTalkingBotCommands\ActionCommand::class,
             ],
@@ -140,7 +141,8 @@ return [
     |
     */
     'commands' => [
-        HelpCommand::class,
+//        HelpCommand::class,
+        App\Http\TelegramBotCommands\StartCommand::class,
     ],
 
     /*
