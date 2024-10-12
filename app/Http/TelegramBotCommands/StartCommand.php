@@ -19,7 +19,7 @@ class StartCommand extends Command
 
     public function handle($arguments = null): mixed
     {
-        $update = Telegram::bot('talkingBot')->getWebhookUpdate();
+        $update = Telegram::bot('botTakBot')->getWebhookUpdate();
 
         $telegramUserId = $update->getMessage()->getFrom()->getId();
         $message = 'Отвечаю тебе' . $telegramUserId;
