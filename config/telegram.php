@@ -68,7 +68,7 @@ return [
     | your default bot for regular use.
     |
     */
-    'default' => 'mybot',
+    'default' => 'botTakBot',
 
     /*
     |--------------------------------------------------------------------------

@@ -58,7 +58,6 @@ class TelegramChatController extends Controller
             );
             $this->telegramBotService->sendTelegramQuiz($telegramChatId);
         } else {
-            //TODO: убрать после тестов
             $data = $update['callback_query']['data'];
             $callback_query = $update['callback_query'];
             Log::debug(
@@ -75,7 +74,7 @@ class TelegramChatController extends Controller
 
     public function setWebHook(): JsonResponse
     {
-        Telegram::setWebhook(['url' => route('webhook')]);
+        Telegram::setWebhook(['url' => 'https://oneferov.ru/vot/webhook/' . config('telegram.bots.botTakBot.token')]);
 
         return response()->json(['status' => 'ok']);
     }

@@ -10,6 +10,6 @@ Route::get('/', function () {
 Route::get('bot', [TelegramChatController::class, 'index']);
 Route::get('set_webhook', [TelegramChatController::class, 'setWebHook']);
 
-Route::post('vot/webhook', [TelegramChatController::class, 'webhook'])->name('webhook');
+Route::post('vot/webhook/' . config('telegram.bots.botTakBot.token'), [TelegramChatController::class, 'webhook'])->name('webhook');
 
 Route::get('php', function () {phpinfo();});
