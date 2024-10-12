@@ -12,7 +12,7 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->validateCsrfTokens(except: [
-            '/vot/webhook' . config('telegram.bots.botTakBot.token')
+            '/vot/webhook/8152238174:AAEsWdDKUUdhyrG61R2SifhVtvxzqqJgTjE'
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
