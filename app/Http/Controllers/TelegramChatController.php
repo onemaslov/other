@@ -35,62 +35,13 @@ class TelegramChatController extends Controller
             return response()->json(['status' => 'ok']);
         }
 
-        $message = $update->getMessage();
-
         Log::debug(
-            __METHOD__,
+            'updateData',
             [
                 'update' => $update,
             ]
         );
-
-        $telegramChatId = $message->getChat()->getId();
-
-
-
-        if (isset($message['reply_to_message'])) {
-
-            Log::debug(
-                'кейс ответа на нажатие клавиатуры',
-                [
-                    'reply_to_message' => $message['reply_to_message']
-                ]
-            );
-//			$this->telegramBotService->sendTelegramQuiz($telegramChatId);
-        } else {
-
-            Log::debug(
-                'кейс сообщения в чате',
-                [
-                    '$message' => $message
-                ]
-            );
-            $this->telegramBotService->sendTelegramQuiz($telegramChatId);
-        }
-
-
-//        if (!isset($update['callback_query'])) {
-//            $telegramChatId = $message->getChat()->getId();
-//            Log::debug(
-//                'кейс первого сообщения',
-//                [
-//                    '$message' => $message
-//                ]
-//            );
-//            $this->telegramBotService->sendTelegramQuiz($telegramChatId);
-//        } else {
-//            $data = $update['callback_query']['data'];
-//            $callback_query = $update['callback_query'];
-//            Log::debug(
-//                'кейс обработки ответа пользователей на опросы',
-//                [
-//                    'callbackQueryData' => $callback_query
-//                ]
-//            );
-//            return $this->telegramBotService->storeQuizAnswer($update['callback_query']);
-//        }
-
-        return response()->json(['status' => 'ok']);
+        return $this->telegramBotService->sendTelegramQuiz($update);
     }
 
     public function setWebHook(): JsonResponse
