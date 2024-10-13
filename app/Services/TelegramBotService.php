@@ -43,6 +43,7 @@ class TelegramBotService
 
         $data = [
             'chat_id' => $telegramChatId,
+            'reply_markup' => $keyboard
         ];
 
         if (isset($update['callback_query'])) {
@@ -57,8 +58,6 @@ class TelegramBotService
             $quizId = $params['quiz_id'] ?? null;
             $quizOptionId = $params['quiz_option_id'] ?? null;
 
-            $data['reply_to_message_id'] = $messageId;
-
             if ($quizFinish) {
                 $data['reply_markup'] = null;
                 $data['text'] = $userFullName . ', спасибо за ответ';
@@ -67,11 +66,8 @@ class TelegramBotService
             }
 
             $data['text'] = $userFullName . ' ответил ' . $quizOptionId . ' можно еще или нажать Завершить';
-            $keyboard->setSelective(true);
-            $data['reply_markup'] = $keyboard;
         } else {
             $data['text'] = 'Такой вопрос';
-            $data['reply_markup'] = $keyboard;
         }
 
         return $this->sendMessage($data, 'Telegram опрос не был отправлен: ');
