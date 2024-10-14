@@ -18,8 +18,9 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" rel="stylesheet">
 </head>
 
-<body class="template transition">
+<body class="">
     @yield('body')
+
 {{--    @include('includes.modals')--}}
     <!-- <script src="/themes/dashboard-builder/js/app.js?v={{config('release.v')}}"></script> -->
     <script src="/themes/dashboard-builder/js/app-wms.js?v={{config('release.v')}}"></script>
@@ -56,4 +57,31 @@
 {{--@include('includes.icons.icons-side-bar')--}}
 
 </body>
+<style>
+    html {
+        padding: 0;
+        margin: 0;
+    }
+    body {
+        min-height: 100vh;
+        padding: 0;
+        margin: 0;
+        font-family: "Roboto Flex", sans-serif;
+        font-size: 18px;
+        color: #4a5568;
+    }
+    .body_content {
+        display: flex;
+        min-height: 100vh;
+    }
+    .sidebar {
+        background: #101935;
+        padding: 20px;
+        font-size: 30px;
+    }
+    .content {
+        width: 100%;
+        background: #cacdd0;
+    }
+</style>
 </html>
