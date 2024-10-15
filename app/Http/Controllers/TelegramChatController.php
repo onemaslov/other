@@ -41,6 +41,31 @@ class TelegramChatController extends Controller
                 'update' => $update,
             ]
         );
+
+        if (isset($update['poll'])) {
+            Log::debug(
+                'poll',
+                [
+                    'update' => $update['poll'],
+                ]
+            );
+            return response()->json(['status' => 'ok']);
+        }
+
+        if (isset($update['poll_answer'])) {
+            Log::debug(
+                'poll_answer',
+                [
+                    'update' => $update['poll_answer'],
+                ]
+            );
+            return response()->json(['status' => 'ok']);
+        }
+
+        if (!isset($update['message'])) {
+            return response()->json(['status' => 'ok']);
+        }
+
         return $this->telegramBotService->sendTelegramQuiz($update);
     }
 

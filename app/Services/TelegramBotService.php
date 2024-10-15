@@ -7,6 +7,7 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Telegram\Bot\Keyboard\Keyboard;
 use Telegram\Bot\Laravel\Facades\Telegram;
+use Telegram\Bot\Objects\Message;
 use Telegram\Bot\Objects\Update;
 use Throwable;
 
@@ -14,6 +15,7 @@ class TelegramBotService
 {
     public function sendTelegramQuiz(Update $update): JsonResponse
     {
+
         $keyboardButtons = [
             [
                 'text' => 'Первая кнопка',
@@ -25,13 +27,50 @@ class TelegramBotService
             ],
             [
                 'text' => 'Третья кнопка',
-                'callback_data' => 'quiz_id=1' . '&quiz_option_id=3',
+                'text_entities' => 'quiz_id=1' . '&quiz_option_id=3',
             ],
             [
                 'text' => 'Завершить',
-                'callback_data' => 'finish_quiz=1',
+                'text_entities' => 'finish_quiz=1',
             ]
         ];
+
+//        $keyboardButtons = [
+//                'Первая кнопка',
+//                'Вторая кнопка',
+//                'Третья кнопка',
+//        ];
+
+////////////////////////////////////////////////////////////
+
+        $telegramChatId = $update->getMessage()->getChat()->getId();
+
+        $resp = Telegram::sendPoll([
+            'chat_id' => $telegramChatId,
+            'question' => 'Вопрос викторины',
+            'options' => $keyboardButtons,
+            'explanation_parse_mode' => 'html',
+            'is_anonymous' => false,
+            'quiz' => true,
+            'allows_multiple_answers' => false
+        ]);
+
+
+
+        if (isset($resp['poll'])) {
+            //сохраняем $resp['poll']['id'] в quiz
+            //сохраняем опции айди в квиз оптионс
+            Log::debug(
+                '$RRRRresp',
+                [
+                    'pollid' => $resp['poll']['id'],
+                    'pollopt' => $resp['poll']['options'],
+                ]
+            );
+        }
+        return response()->json(['status' => 'ok']);
+
+        /////////////////////////////////////////////////
 
         $telegramChatId = $update->getMessage()->getChat()->getId();
 
